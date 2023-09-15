@@ -1,8 +1,12 @@
+using Dominio;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace Aplicacion.Persistencia;
 
-public class ApllicacionDbContext : DbCOntext
+public class AplicacionDbContext : DbContext
 {
-    public ApllicacionDbContext(DbContextOptions<AplicacionDbContext> opciones): base (opciones)
+    public AplicacionDbContext(DbContextOptions<AplicacionDbContext> opciones): base (opciones)
     {
         
     }
