@@ -1,10 +1,19 @@
-namespace Dominio;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Dominio;
+[Table("Paciente")]
 public class Paciente: Persona
 {
+    [Key]
+    [Required]
     public Guid IdPaciente {get; set;}
+    [Key]
+    [Required]
     public int NroDNI {get; set;}
+    [Required]
     public int NroAfiliado {get; set;}
+    [Required]
     public DateTime FechaIngreso {get; set;}
    
 
