@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aplicacion.Persistencia.Migraciones
 {
     [DbContext(typeof(AplicacionDbContext))]
-    [Migration("20230916103709_MigracionInicial")]
+    [Migration("20230916140506_MigracionInicial")]
     partial class MigracionInicial
     {
         /// <inheritdoc />
@@ -115,19 +115,21 @@ namespace Aplicacion.Persistencia.Migraciones
                     b.Property<int>("NroAfiliado")
                         .HasColumnType("int");
 
-                    b.Property<int>("NroDNI")
+                    b.Property<int>("PersonaNroDNI")
                         .HasColumnType("int");
 
                     b.HasKey("IdPaciente");
+
+                    b.HasIndex("PersonaNroDNI");
 
                     b.ToTable("Paciente");
                 });
 
             modelBuilder.Entity("Dominio.Persona", b =>
                 {
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                    b.Property<int>("NroDNI")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -137,7 +139,12 @@ namespace Aplicacion.Persistencia.Migraciones
                     b.Property<DateOnly>("Nacimiento")
                         .HasColumnType("date");
 
-                    b.HasKey("Nombre");
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("NroDNI");
 
                     b.ToTable("Persona");
                 });
@@ -231,6 +238,17 @@ namespace Aplicacion.Persistencia.Migraciones
                     b.HasKey("IdUsuario");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("Dominio.Paciente", b =>
+                {
+                    b.HasOne("Dominio.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("PersonaNroDNI")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Persona");
                 });
 #pragma warning restore 612, 618
         }

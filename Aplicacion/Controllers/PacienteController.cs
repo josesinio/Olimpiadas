@@ -18,7 +18,7 @@ public class PacienteController : ControllerBase
     [HttpGet]
     public ActionResult Get()
     {
-        var  pacientes = contexto.Pacientes;
+        var pacientes = contexto.Pacientes;
         return Ok(pacientes);
     }
 
@@ -29,10 +29,10 @@ public class PacienteController : ControllerBase
         return Ok(paciente);
     }
 
-        [HttpPost]
+    [HttpPost]
     public ActionResult Post([FromBody] PacienteVM paciente)
     {
-        var  nuevopaciente = new Paciente(idPaciente: new Guid(), paciente.NroDNI, paciente.NroAfiliado, fechaIngreso: DateTime.Now);
+        var nuevopaciente = new Paciente(idPaciente: new Guid(), paciente.NroAfiliado, fechaIngreso: DateTime.Now);
         contexto.Add(nuevopaciente);
         contexto.SaveChanges();
         return StatusCode(StatusCodes.Status201Created);
@@ -49,8 +49,8 @@ public class PacienteController : ControllerBase
         contexto.Pacientes.Remove(pacienteBorrar);
         contexto.SaveChanges();
         return Ok();
-    
 
-}
+
+    }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -69,24 +70,11 @@ namespace Aplicacion.Persistencia.Migraciones
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Paciente",
-                columns: table => new
-                {
-                    IdPaciente = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    NroDNI = table.Column<int>(type: "int", nullable: false),
-                    NroAfiliado = table.Column<int>(type: "int", nullable: false),
-                    FechaIngreso = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Paciente", x => x.IdPaciente);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Persona",
                 columns: table => new
                 {
+                    NroDNI = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Apellido = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
@@ -95,7 +83,7 @@ namespace Aplicacion.Persistencia.Migraciones
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Persona", x => x.Nombre);
+                    table.PrimaryKey("PK_Persona", x => x.NroDNI);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -157,6 +145,32 @@ namespace Aplicacion.Persistencia.Migraciones
                     table.PrimaryKey("PK_Usuario", x => x.IdUsuario);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Paciente",
+                columns: table => new
+                {
+                    IdPaciente = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    NroAfiliado = table.Column<int>(type: "int", nullable: false),
+                    FechaIngreso = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    PersonaNroDNI = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Paciente", x => x.IdPaciente);
+                    table.ForeignKey(
+                        name: "FK_Paciente_Persona_PersonaNroDNI",
+                        column: x => x.PersonaNroDNI,
+                        principalTable: "Persona",
+                        principalColumn: "NroDNI",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Paciente_PersonaNroDNI",
+                table: "Paciente",
+                column: "PersonaNroDNI");
         }
 
         /// <inheritdoc />
@@ -175,9 +189,6 @@ namespace Aplicacion.Persistencia.Migraciones
                 name: "Paciente");
 
             migrationBuilder.DropTable(
-                name: "Persona");
-
-            migrationBuilder.DropTable(
                 name: "Personal");
 
             migrationBuilder.DropTable(
@@ -185,6 +196,9 @@ namespace Aplicacion.Persistencia.Migraciones
 
             migrationBuilder.DropTable(
                 name: "Usuario");
+
+            migrationBuilder.DropTable(
+                name: "Persona");
         }
     }
 }
