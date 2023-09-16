@@ -32,7 +32,7 @@ public class PersonalMedicoController : ControllerBase
     [HttpPost]
     public ActionResult Post([FromBody] PersonalMedicoVM personalMedico)
     {
-        var  nuevomedico = new PersonalMedico(idPersonalMedico: new Guid(),personalMedico.Matricula, personalMedico.Area, personalMedico.Nombre, personalMedico.Apellido );
+        var  nuevomedico = new PersonalMedico(idPersonalMedico: new Guid() ,personalMedico.Matricula, personalMedico.Area, personalMedico.Nombre, personalMedico.Apellido );
         contexto.Add(nuevomedico);
         contexto.SaveChanges();
         return StatusCode(StatusCodes.Status201Created);
