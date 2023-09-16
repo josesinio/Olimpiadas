@@ -7,6 +7,8 @@ public class PersonalMedico
 {
     [Key]
     [Required]
+    public Guid IdPersonalMedico {get; set;}
+    [Required]
     [StringLength(50)]
     public string Matricula {get; set;}
     [Required]
@@ -20,13 +22,18 @@ public class PersonalMedico
     public string Apellido {get; set;}
 
 
-    public PersonalMedico(string matricula,string area, string nombre, string apellido )
+    public PersonalMedico(Guid idPersonalMedico, string matricula,string area, string nombre, string apellido )
     {
+        IdPersonalMedico = idPersonalMedico;  
         Matricula = matricula;
         Area = area ;
         Nombre = nombre;
         Apellido = apellido;
-       
+    }
+
+    public void ModificarPersonal(string matricula)
+    {
+        this.Matricula = matricula;
     }
 
 }

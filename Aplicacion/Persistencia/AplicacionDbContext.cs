@@ -13,7 +13,7 @@ public class AplicacionDbContext : DbContext
     public DbSet<Atencion> Atenciones {get; set; }
     public DbSet<FichaPaciente> FichasPacientes {get; set;}
     public DbSet<Llamada> Llamadas {get; set;}
-    public DbSet<Paciente> Pacientes {get; set;}
+    public DbSet<Paciente> Pacientes {get; set;} 
     public DbSet<Persona> Personas {get;set;}
     public DbSet<Personal> Personales {get;set;}
     public DbSet<PersonalMedico> PersonalesMedicos {get;set;}

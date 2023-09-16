@@ -9,7 +9,7 @@ public class FichaPaciente
     [Key]
     [Required]
     public Guid IdFichaPaciente {get; set;}
-    [Key]
+    
     [Required]
     public int NroDNI {get; set;}
     [Required]
@@ -32,7 +32,13 @@ public class FichaPaciente
         Enfermedades = enfermedades;
         Alergias = alergias;
         TipoSangre = tipoSangre;
-       
+    }
+
+    public void ModificarFicha( string vacunas, string enfermedades, string alergias)
+    {
+        this.Vacunas = vacunas;
+        this.Enfermedades = enfermedades;
+        this.Alergias = alergias;
     }
 
 }

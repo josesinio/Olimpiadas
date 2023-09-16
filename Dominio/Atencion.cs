@@ -9,7 +9,7 @@ public class Atencion
     [Key]
     [Required]
     public Guid IdAtencion {get; set;}
-    [Key]
+    
     [Required]
     public Guid IdPaciente {get; set;}
     [Required]
@@ -19,17 +19,22 @@ public class Atencion
     [StringLength(50)]
     public string Descripcion {get; set;}
     [Required]
-    public DateOnly Fecha {get;set;}
+    public DateTime FechaHora {get;set;}
     [Required]
     public int NroHabitacion {get; set;}
-    public Atencion(Guid idAtencion, Guid idPaciente, string matricula, string descripcion, DateOnly fecha, int nroHabitacion)
+    public Atencion(Guid idAtencion, Guid idPaciente, string matricula, string descripcion, DateTime fechaHora, int nroHabitacion)
     {
         IdAtencion = idAtencion;
         IdPaciente = idPaciente;
         Matricula = matricula;
         Descripcion = descripcion;
-        Fecha = fecha;
+        FechaHora = fechaHora;
         NroHabitacion = nroHabitacion;
     }
 
+    public void ModificarAtencion (string matricula, string descripcion, int nroHabitacion){
+        this.Matricula= matricula; 
+        this.Descripcion= descripcion;
+        this.NroHabitacion= nroHabitacion;
+    }
 }

@@ -8,7 +8,7 @@ public class Usuario
     [Key]
     [Required]
     public Guid IdUsuario {get; set;}
-    [Key]
+    
     [Required]
     public Guid IdPersonal {get; set;}
     [Required]
@@ -35,5 +35,10 @@ public class Usuario
         TipoUsuario = tipoUsuario;
     }
 
+    public void ModificarUsuario ( string email, string contrasenia)
+    {
+        this.Email = email;
+        this.Contrasenia= contrasenia;
+    }
 
 }

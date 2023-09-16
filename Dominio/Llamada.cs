@@ -8,7 +8,7 @@ public class Llamada
     [Key]
     [Required]
     public Guid IdLlamada {get; set; }
-    [Key]
+    
     [Required]
     public Guid IdAtencion {get; set; }
     [Required]
