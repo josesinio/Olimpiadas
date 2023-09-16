@@ -13,7 +13,7 @@ public class Paciente
     public int NroAfiliado { get; set; }
     [Required]
     public DateTime FechaIngreso { get; set; }
-    [Required]
+    
     public Persona? Persona { get; set; } = null;
 
     public Paciente(Guid idPaciente, int nroAfiliado, DateTime fechaIngreso)

@@ -44,7 +44,7 @@ public class PacienteController : ControllerBase
         var pacienteBorrar = contexto.Pacientes.FirstOrDefault(x => x.IdPaciente == id);
 
         if (pacienteBorrar is null)
-            throw new Exception("no existe una llamada con ese Id.");
+            throw new Exception("no existe un paciente con ese Id.");
 
         contexto.Pacientes.Remove(pacienteBorrar);
         contexto.SaveChanges();

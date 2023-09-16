@@ -153,7 +153,7 @@ namespace Aplicacion.Persistencia.Migraciones
                     IdPaciente = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     NroAfiliado = table.Column<int>(type: "int", nullable: false),
                     FechaIngreso = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PersonaNroDNI = table.Column<int>(type: "int", nullable: false)
+                    PersonaNroDNI = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,8 +162,7 @@ namespace Aplicacion.Persistencia.Migraciones
                         name: "FK_Paciente_Persona_PersonaNroDNI",
                         column: x => x.PersonaNroDNI,
                         principalTable: "Persona",
-                        principalColumn: "NroDNI",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "NroDNI");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

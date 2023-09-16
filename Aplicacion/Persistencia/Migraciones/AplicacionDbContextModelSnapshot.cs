@@ -112,7 +112,7 @@ namespace Aplicacion.Persistencia.Migraciones
                     b.Property<int>("NroAfiliado")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonaNroDNI")
+                    b.Property<int?>("PersonaNroDNI")
                         .HasColumnType("int");
 
                     b.HasKey("IdPaciente");
@@ -241,9 +241,7 @@ namespace Aplicacion.Persistencia.Migraciones
                 {
                     b.HasOne("Dominio.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaNroDNI")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonaNroDNI");
 
                     b.Navigation("Persona");
                 });

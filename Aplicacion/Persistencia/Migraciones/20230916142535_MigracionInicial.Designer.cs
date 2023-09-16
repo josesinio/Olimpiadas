@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aplicacion.Persistencia.Migraciones
 {
     [DbContext(typeof(AplicacionDbContext))]
-    [Migration("20230916140506_MigracionInicial")]
+    [Migration("20230916142535_MigracionInicial")]
     partial class MigracionInicial
     {
         /// <inheritdoc />
@@ -115,7 +115,7 @@ namespace Aplicacion.Persistencia.Migraciones
                     b.Property<int>("NroAfiliado")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonaNroDNI")
+                    b.Property<int?>("PersonaNroDNI")
                         .HasColumnType("int");
 
                     b.HasKey("IdPaciente");
@@ -244,9 +244,7 @@ namespace Aplicacion.Persistencia.Migraciones
                 {
                     b.HasOne("Dominio.Persona", "Persona")
                         .WithMany()
-                        .HasForeignKey("PersonaNroDNI")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonaNroDNI");
 
                     b.Navigation("Persona");
                 });
